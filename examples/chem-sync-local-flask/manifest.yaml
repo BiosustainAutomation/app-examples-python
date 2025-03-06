@@ -2,7 +2,7 @@ manifestVersion: 1
 
 info:
   name: Sample Sync App
-  version: 0.1.0
+  version: 0.1.2
 features:
   - name: Sync Step
     id: sync_step
@@ -23,13 +23,13 @@ configuration:
     requiredConfig: true
   - name: Molecule Schema
     type: entity_schema
-    subtype: molecule
+    subtype: custom_entity
     description: A chemical schema for molecules synced from PubChem.
     requiredConfig: true
     fieldDefinitions:
       - name: Molecular Weight
         type: float
-        requiredConfig: true
+        requiredConfig: false
       - name: MonoIsotopic
         type: float
-        requiredConfig: true
+        requiredConfig: false

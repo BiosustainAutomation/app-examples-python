@@ -3,7 +3,7 @@ import os
 
 # Enable basic logging for development debugging
 logging.basicConfig(format="%(name)s - %(asctime)s - {%(pathname)s:%(lineno)d} - %(message)s",
-                    level=logging.WARNING)
+                    level=logging.DEBUG)
 
 
 # Get a logger for our App, with a level enabled specifically for our logging but not other libraries

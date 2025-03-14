@@ -8,7 +8,10 @@ from benchling_sdk.models import (
     MarkdownUiBlockType,
     TextInputUiBlock,
     TextInputUiBlockType,
-    SearchInputUiBlock
+    SearchInputUiBlock,
+    SearchInputUiBlockType,
+    SearchInputUiBlockItemType
+    
 )
 from benchling_sdk.models.webhooks.v0 import (
     CanvasCreatedWebhookV2Beta,
@@ -41,13 +44,15 @@ def input_blocks() -> list[UiBlock]:
         MarkdownUiBlock(
             id="top_instructions",
             type=MarkdownUiBlockType.MARKDOWN,
-            value="Enter an entity to search for",
+            value="Test Canvas Entity Search",
         ),
         SearchInputUiBlock(
-            id=SEARCH_TEXT_ID,
-            type="SEARCH_INPUT",
-            placeholder="Entity to search...",
-            value="",
+            id="input_block_1",
+            type=SearchInputUiBlockType.SEARCH_INPUT,  # Use the enum instead of a string
+            item_type=SearchInputUiBlockItemType.DNA_SEQUENCE,
+            value=None,
+            schema_id=None,
+            enabled=True
         ),
         ButtonUiBlock(
             id=SEARCH_BUTTON_ID,

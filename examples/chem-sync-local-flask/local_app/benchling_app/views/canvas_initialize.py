@@ -8,6 +8,7 @@ from benchling_sdk.models import (
     MarkdownUiBlockType,
     TextInputUiBlock,
     TextInputUiBlockType,
+    SearchInputUiBlock
 )
 from benchling_sdk.models.webhooks.v0 import (
     CanvasCreatedWebhookV2Beta,
@@ -40,17 +41,17 @@ def input_blocks() -> list[UiBlock]:
         MarkdownUiBlock(
             id="top_instructions",
             type=MarkdownUiBlockType.MARKDOWN,
-            value="Enter a chemical name to search. For example, _'aspirin'_",
+            value="Enter an entity to search for",
         ),
-        TextInputUiBlock(
+        SearchInputUiBlock(
             id=SEARCH_TEXT_ID,
-            type=TextInputUiBlockType.TEXT_INPUT,
-            placeholder="Chemical name to search...",
+            type="SEARCH_INPUT",
+            placeholder="Entity to search...",
             value="",
         ),
         ButtonUiBlock(
             id=SEARCH_BUTTON_ID,
-            text="Search Chemicals",
+            text="Search entities",
             type=ButtonUiBlockType.BUTTON,
         ),
     ]

@@ -1,3 +1,22 @@
+import sys
+import os
+# Add the parent directory to sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+# Load Client Secret securely from a file
+client_secret_path = os.path.expanduser("~/.benchling_client_secret")
+
+if os.path.exists(client_secret_path):
+    with open(client_secret_path, "r") as f:
+        CLIENT_SECRET = f.read().strip()
+else:
+    CLIENT_SECRET = None  # Handle missing secret gracefully
+
+# Load Client ID from environment variable
+CLIENT_ID = os.getenv("CLIENT_ID", "mDI9Ank6Lo")  # Replace if needed
+
+
 from threading import Thread
 
 from benchling_sdk.apps.helpers.webhook_helpers import verify
@@ -44,3 +63,7 @@ def _enqueue_work() -> None:
         args=(request.json,),
     )
     thread.start()
+
+if __name__ == "__main__":
+    app = create_app()
+    app.run(host='0.0.0.0', port=8000, debug=True)

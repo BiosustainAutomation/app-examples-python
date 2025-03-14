@@ -4,18 +4,33 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-# Load Client Secret securely from a file
-client_secret_path = os.path.expanduser("~/.benchling_client_secret")
+# # Load Client Secret securely from a file
+# client_secret_path = os.path.expanduser("~/.benchling_client_secret")
 
-if os.path.exists(client_secret_path):
-    with open(client_secret_path, "r") as f:
-        CLIENT_SECRET = f.read().strip()
-else:
-    CLIENT_SECRET = None  # Handle missing secret gracefully
+# if os.path.exists(client_secret_path):
+#     with open(client_secret_path, "r") as f:
+#         CLIENT_SECRET = f.read().strip()
+# else:
+#     CLIENT_SECRET = None  # Handle missing secret gracefully
 
-# Load Client ID from environment variable
-CLIENT_ID = os.getenv("CLIENT_ID", "mDI9Ank6Lo")  # Replace if needed
+# # Load Client ID from environment variable
+# CLIENT_ID = os.getenv("CLIENT_ID", "mDI9Ank6Lo")  # Replace if needed
 
+import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+# Find .env file
+root_dir = Path(__file__).parent.parent
+dotenv_path = root_dir / '.env'
+
+# Load environment variables
+load_dotenv(dotenv_path=dotenv_path)
+
+# Verify the variable is loaded
+app_def_id = os.getenv("APP_DEFINITION_ID")
+if not app_def_id:
+    print("WARNING: APP_DEFINITION_ID is not set!")
 
 from threading import Thread
 

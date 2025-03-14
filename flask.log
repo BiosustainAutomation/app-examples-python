@@ -1,0 +1,32 @@
+nohup: ignoring input
+ * Serving Flask app 'benchling-app'
+ * Debug mode: on
+werkzeug - 2025-03-12 10:06:55,748 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.12.0.4:8000
+werkzeug - 2025-03-12 10:06:55,748 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - [33mPress CTRL+C to quit[0m
+werkzeug - 2025-03-12 10:06:55,748 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} -  * Restarting with stat
+werkzeug - 2025-03-12 10:06:56,376 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} -  * Debugger is active!
+werkzeug - 2025-03-12 10:06:56,377 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} -  * Debugger PIN: 118-496-424
+werkzeug - 2025-03-12 10:08:40,382 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 213.89.120.169 - - [12/Mar/2025 10:08:40] "[31m[1mGET /1/webhooks/test HTTP/1.1[0m" 405 -
+werkzeug - 2025-03-12 10:08:56,073 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 213.89.120.169 - - [12/Mar/2025 10:08:56] "GET /health HTTP/1.1" 200 -
+werkzeug - 2025-03-12 10:09:08,295 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 213.89.120.169 - - [12/Mar/2025 10:09:08] "[33mGET /1/webhooks HTTP/1.1[0m" 404 -
+werkzeug - 2025-03-12 10:27:02,639 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 127.0.0.1 - - [12/Mar/2025 10:27:02] "POST /1/webhooks/test HTTP/1.1" 200 -
+werkzeug - 2025-03-12 10:29:16,947 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 213.89.120.169 - - [12/Mar/2025 10:29:16] "POST /1/webhooks/test HTTP/1.1" 200 -
+werkzeug - 2025-03-12 10:45:02,017 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 109.236.61.84 - - [12/Mar/2025 10:45:02] code 400, message Bad request version ('}')
+werkzeug - 2025-03-12 10:45:02,018 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 109.236.61.84 - - [12/Mar/2025 10:45:02] "[31m[1mÿ\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00ñ\x03%\x00\x00\x00{ "Ret" : 100, "SessionID" : "0x0" }[0m" 400 -
+werkzeug - 2025-03-12 11:35:13,985 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 8.219.53.209 - - [12/Mar/2025 11:35:13] code 400, message Bad request syntax ('nil')
+werkzeug - 2025-03-12 11:35:13,986 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 8.219.53.209 - - [12/Mar/2025 11:35:13] "[31m[1mnil[0m" 400 -
+werkzeug - 2025-03-12 11:35:14,561 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 8.219.53.209 - - [12/Mar/2025 11:35:14] "[33mGET / HTTP/1.0[0m" 404 -
+werkzeug - 2025-03-12 11:35:14,947 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 8.219.53.209 - - [12/Mar/2025 11:35:14] "[33mGET / HTTP/1.1[0m" 404 -
+werkzeug - 2025-03-12 11:35:15,338 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 8.219.53.209 - - [12/Mar/2025 11:35:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+werkzeug - 2025-03-12 11:35:26,487 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 111.7.96.178 - - [12/Mar/2025 11:35:26] "[33mGET / HTTP/1.1[0m" 404 -
+werkzeug - 2025-03-12 11:49:54,757 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 45.79.181.179 - - [12/Mar/2025 11:49:54] code 400, message Bad request syntax ('\x16\x03\x01\x01')
+werkzeug - 2025-03-12 11:49:54,758 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 45.79.181.179 - - [12/Mar/2025 11:49:54] "[31m[1m\x16\x03\x01\x01[0m" 400 -
+werkzeug - 2025-03-12 11:49:54,883 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 45.79.181.179 - - [12/Mar/2025 11:49:54] code 400, message Bad request syntax ('\x16\x03\x01\x01')
+werkzeug - 2025-03-12 11:49:54,884 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 45.79.181.179 - - [12/Mar/2025 11:49:54] "[31m[1m\x16\x03\x01\x01[0m" 400 -
+werkzeug - 2025-03-12 12:04:17,701 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 69.164.217.74 - - [12/Mar/2025 12:04:17] "[33mGET / HTTP/1.1[0m" 404 -
+werkzeug - 2025-03-12 12:04:27,418 - {/home/lajamu/app-examples-python/venv/lib/python3.11/site-packages/werkzeug/_internal.py:97} - 172.104.11.46 - - [12/Mar/2025 12:04:27] "[33mGET / HTTP/1.1[0m" 404 -
+Received webhook from IP: 127.0.0.1
+Received webhook from IP: 213.89.120.169

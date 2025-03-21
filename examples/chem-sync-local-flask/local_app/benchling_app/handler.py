@@ -7,12 +7,11 @@ from benchling_sdk.models.webhooks.v0 import (
     CanvasInteractionWebhookV2,
     WebhookEnvelopeV0,
 )
-
+import os
 from local_app.benchling_app.canvas_interaction import route_interaction_webhook
 from local_app.benchling_app.setup import init_app_from_webhook
 from local_app.benchling_app.views.canvas_initialize import (
-    render_search_canvas,
-    render_search_canvas_for_created_canvas,
+render_text_canvas, render_text_canvas_for_created_canvas
 )
 from local_app.lib.logger import get_logger
 
@@ -24,6 +23,10 @@ class UnsupportedWebhookError(Exception):
 
 
 def handle_webhook(webhook_dict: dict[str, Any]) -> None:
+    # print("Current working directory:", os.getcwd())
+    # print("Looking for file at:", os.path.abspath('.client_secret'))
+    # print("Does file exist?", os.path.exists('.client_secret'))
+    # print("Contents of directory:", os.listdir('.'))
     logger.debug("Handling webhook with payload: %s", webhook_dict)
     webhook = WebhookEnvelopeV0.from_dict(webhook_dict)
     app = init_app_from_webhook(webhook)
@@ -32,11 +35,11 @@ def handle_webhook(webhook_dict: dict[str, Any]) -> None:
     # then `webhook.message.feature_id` may also need to be part of your routing logic
     try:
         if isinstance(webhook.message, CanvasInitializeWebhookV2):
-            render_search_canvas(app, webhook.message)
+            render_text_canvas(app, webhook.message)
         elif isinstance(webhook.message, CanvasInteractionWebhookV2):
             route_interaction_webhook(app, webhook.message)
         elif isinstance(webhook.message, CanvasCreatedWebhookV2Beta):
-            render_search_canvas_for_created_canvas(app, webhook.message)
+            render_text_canvas_for_created_canvas(app, webhook.message)
         else:
             # Should only happen if the app's manifest requests webhooks that aren't handled in its code paths
             raise UnsupportedWebhookError(f"Received an unsupported webhook type: {webhook}")
@@ -46,3 +49,4 @@ def handle_webhook(webhook_dict: dict[str, Any]) -> None:
     # For this example, Flask error handler won't intercept this since we're within a thread
     except AppUserFacingError as e:
         logger.debug("Exiting with client error: %s", e)
+

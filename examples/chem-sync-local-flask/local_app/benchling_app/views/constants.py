@@ -8,3 +8,5 @@ SEARCH_TEXT_ID = "search_text"
 
 # Keys for canvas data
 CID_KEY = "chemical_cid"
+PROCESS_BUTTON_ID = "process_button"
+TEXT_INPUT_ID = "input_text"

@@ -7,6 +7,9 @@ from benchling_sdk.models import (
     ButtonUiBlockType,
     MarkdownUiBlock,
     MarkdownUiBlockType,
+    SearchInputUiBlock,
+    SearchInputUiBlockType,
+    SearchInputUiBlockItemType,
     TextInputUiBlock,
     TextInputUiBlockType,
 )
@@ -47,16 +50,17 @@ def input_blocks() -> list[UiBlock]:
             type=MarkdownUiBlockType.MARKDOWN,
             value="# Text Processing App\nEnter text below and click 'Process' to analyze it.",
         ),
-        TextInputUiBlock(
-            id=TEXT_INPUT_ID,
-            type=TextInputUiBlockType.TEXT_INPUT,
-            placeholder="Enter your text here...",
+        SearchInputUiBlock(
+            id="input_block_1",
+            type=SearchInputUiBlockType.SEARCH_INPUT, 
+            item_type=SearchInputUiBlockItemType.DNA_SEQUENCE,
             value=None,
+            schema_id=None,
             enabled=True
         ),
         ButtonUiBlock(
             id=PROCESS_BUTTON_ID,
-            text="Process Text",
+            text="Process CSV",
             type=ButtonUiBlockType.BUTTON,
         ),
     ]

@@ -53,6 +53,7 @@ def create_app() -> Flask:
 
             # Get the raw request body as a string for verification
             raw_body = request.data.decode("utf-8")
+            print("!!!!!!!!!" + raw_body)
             
             try:
                 # Important! To verify webhooks, we need to pass the body as an unmodified string
@@ -64,7 +65,7 @@ def create_app() -> Flask:
             # Parse JSON only after verification
             try:
                 webhook_data = request.json
-                logger.debug(f"Webhook data: {webhook_data}")
+                logger.info(f"Webhook data: {webhook_data}")
             except Exception as e:
                 logger.error(f"Failed to parse webhook JSON: {str(e)}")
                 return jsonify({"error": "Invalid JSON in request"}), 400

@@ -38,6 +38,7 @@ def handle_webhook(webhook_dict: dict[str, Any]) -> None:
             render_text_canvas(app, webhook.message)
         elif isinstance(webhook.message, CanvasInteractionWebhookV2):
             route_interaction_webhook(app, webhook.message)
+            print(webhook.message)
         elif isinstance(webhook.message, CanvasCreatedWebhookV2Beta):
             render_text_canvas_for_created_canvas(app, webhook.message)
         else:

@@ -1,5 +1,5 @@
 from typing import cast
-
+import requests
 from benchling_sdk.apps.canvas.framework import CanvasBuilder
 from benchling_sdk.apps.framework import App
 from benchling_sdk.apps.status.errors import AppUserFacingError
@@ -13,11 +13,21 @@ from benchling_sdk.models import (
     TextInputUiBlock,
     TextInputUiBlockType,
 )
+from benchling_sdk.models import CustomEntity
+
+
 
 from local_app.benchling_app.views.constants import (
 PROCESS_BUTTON_ID,
 TEXT_INPUT_ID
 )
+
+from local_app.lib.logger import get_logger
+
+logger = get_logger()
+
+
+import csv
 
 class UnsupportedButtonError(Exception):
     pass
@@ -30,7 +40,11 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             session.attach_canvas(canvas_id)
             canvas_builder = _canvas_builder_from_canvas_id(app, canvas_id)
             canvas_inputs = canvas_builder.inputs_to_dict_single_value()
-            
+            print("!!!!!!!!!!!" + str(canvas_inputs))
+            print("=====" + canvas_inputs["input_block_1"])
+
+
+
             # Validate input
             if not canvas_inputs.get(TEXT_INPUT_ID):
                 raise AppUserFacingError("Please enter text to process")
@@ -48,7 +62,7 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             f"Whoops, the developer forgot to handle the button {canvas_interaction.button_id}",
         )
 
-def process_text(text: str) -> dict:
+def process_csv(text: str) -> dict:
     """
     Process the input text and return results.
     Replace this with your actual text processing logic.
@@ -67,16 +81,7 @@ def render_results_canvas(results: dict, canvas_id: str, canvas_builder: CanvasB
     Render the results canvas with the processed text information.
     """
     # Create markdown for results
-    results_markdown = f"""
-# Processing Results
-
-**Original Text:** {results['original_text']}
-
-## Statistics:
-- Word count: {results['word_count']}
-- Character count: {results['character_count']}
-- Uppercase letters: {results['uppercase_count']}
-    """
+   
     
     # Create blocks for the results canvas
     results_blocks = [

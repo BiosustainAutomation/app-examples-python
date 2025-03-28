@@ -22,6 +22,7 @@ from benchling_sdk.models.webhooks.v0 import (
     CanvasInitializeWebhookV2,
 )
 
+
 # Constants to use across files
 
 
@@ -48,12 +49,12 @@ def input_blocks() -> list[UiBlock]:
         MarkdownUiBlock(
             id="instructions",
             type=MarkdownUiBlockType.MARKDOWN,
-            value="# Text Processing App\nEnter text below and click 'Process' to analyze it.",
+            value="# Text Processing App\nEnter CSV Entity in search box below",
         ),
         SearchInputUiBlock(
             id="input_block_1",
             type=SearchInputUiBlockType.SEARCH_INPUT, 
-            item_type=SearchInputUiBlockItemType.DNA_SEQUENCE,
+            item_type=SearchInputUiBlockItemType.CUSTOM_ENTITY,
             value=None,
             schema_id=None,
             enabled=True

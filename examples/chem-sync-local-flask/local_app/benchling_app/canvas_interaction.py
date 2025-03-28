@@ -41,41 +41,40 @@ class UnsupportedButtonError(Exception):
 def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWebhookV2) -> None:
     canvas_id = canvas_interaction.canvas_id
     
-
+    #When the button is pressed, do this here:
     if canvas_interaction.button_id == PROCESS_BUTTON_ID:
         with app.create_session_context("Process Text", timeout_seconds=20) as session:
+            
             session.attach_canvas(canvas_id)
             canvas_builder = _canvas_builder_from_canvas_id(app, canvas_id)
             canvas_inputs = canvas_builder.inputs_to_dict_single_value()
 
-
+            #Pull the entity ID
             canvas = app.benchling.apps.get_canvas_by_id(canvas_id)
-
-
             ent_id = canvas_inputs["input_block_1"]
             cust_serv = CustomEntityService(client=app.benchling._client)
-
+            #Get the entity
             benchling_csv_ent = cust_serv.get_by_id(ent_id)
 
-            properties = vars(benchling_csv_ent)
-            for name, value in properties.items():
-                print(f"{name}: {value}")
-
+            #blob service to get the CSV from it's ID Via the entity ID
             blob_serv = BlobService(client = app.benchling._client)
             blob_id = benchling_csv_ent._fields['CSV'].value
             destination_path = Path("downloaded_files/test.csv")
             destination_path.parent.mkdir(parents=True, exist_ok=True)
 
-
+            #Download the csv
             blob_csv = blob_serv.download_file(blob_id, destination_path)
+
+            append_row_to_csv("/home/lajamu/app-examples-python/downloaded_files/test.csv")
+
+            
+
 
 
             if not canvas_inputs.get(TEXT_INPUT_ID):
                 raise AppUserFacingError("Please search for a CSV entity to proceed")
             
-            # Process the text
-            processed_text = process_text(canvas_inputs[TEXT_INPUT_ID])
-            
+
             # Render results
             render_results_canvas(processed_text, canvas_id, canvas_builder, session)
     else:
@@ -114,3 +113,10 @@ def render_results_canvas(results: dict, canvas_id: str, canvas_builder: CanvasB
 def _canvas_builder_from_canvas_id(app: App, canvas_id: str) -> CanvasBuilder:
     current_canvas = app.benchling.apps.get_canvas_by_id(canvas_id)
     return CanvasBuilder.from_canvas(current_canvas)
+
+def append_row_to_csv(file_path):
+    new_row = ["Row3", "Hello again"]
+    with open(file_path, 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(new_row)
+    print(f"Appended row: {new_row}")

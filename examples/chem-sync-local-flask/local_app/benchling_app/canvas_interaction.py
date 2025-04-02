@@ -21,6 +21,8 @@ from benchling_sdk.services.v2.stable.custom_entity_service import CustomEntityS
 from benchling_sdk.services.v2.stable.dna_sequence_service import DnaSequenceService
 from benchling_sdk.services.v2.stable.registry_service import RegistryService
 from benchling_sdk.services.v2.stable.blob_service import BlobService
+from benchling_sdk.models import CustomEntityCreate, BlobCreate
+from benchling_sdk.helpers.serialization_helpers import fields
 
 from local_app.benchling_app.views.constants import (
 PROCESS_BUTTON_ID,
@@ -69,6 +71,27 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
 
             
 
+            blob_service = BlobService(client=app.benchling._client)
+            custom_entity_service = CustomEntityService(client=app.benchling._client)
+            blob_name = "modified_data.csv"
+            file_path = destination_path
+            uploaded_blob = blob_service.create_from_file(file_path, name=blob_name, mime_type="text/csv")
+            entity_name = "Modified Data Entity"
+            folder_id = "lib_dn9tmFzU" # Replace with your folder ID
+            schema_id = "ts_WDtkRWgc" 
+            entity_fields = fields({
+                "CSV": {"value": uploaded_blob.id}  # Assuming 'CSV' is the schema field for the blob link
+            })
+
+            new_entity = CustomEntityCreate(
+                name=entity_name,
+                folder_id=folder_id,
+                schema_id=schema_id,
+                fields=entity_fields
+            )
+
+            created_entity = custom_entity_service.create(new_entity)
+            print(f"Created entity: {created_entity.name} with ID: {created_entity.id}")
 
 
             if not canvas_inputs.get(TEXT_INPUT_ID):

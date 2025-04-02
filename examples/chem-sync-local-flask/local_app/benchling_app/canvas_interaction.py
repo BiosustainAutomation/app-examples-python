@@ -94,12 +94,13 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             print(f"Created entity: {created_entity.name} with ID: {created_entity.id}")
 
 
-            if not canvas_inputs.get(TEXT_INPUT_ID):
-                raise AppUserFacingError("Please search for a CSV entity to proceed")
+            # if not canvas_inputs.get(TEXT_INPUT_ID):
+            #     raise AppUserFacingError("Please search for a CSV entity to proceed")
             
 
             # Render results
-            render_results_canvas(processed_text, canvas_id, canvas_builder, session)
+            render_results_canvas(f"Successfully created entity: [{created_entity.name}]({created_entity.web_url})", canvas_id, canvas_builder, session)
+
     else:
         # Re-enable the Canvas, or it will stay disabled and the user will be stuck
         app.benchling.apps.update_canvas(canvas_id, AppCanvasUpdate(enabled=True))
@@ -108,14 +109,10 @@ def route_interaction_webhook(app: App, canvas_interaction: CanvasInteractionWeb
             f"Whoops, the developer forgot to handle the button {canvas_interaction.button_id}",
         )
 
-def render_results_canvas(results: dict, canvas_id: str, canvas_builder: CanvasBuilder, session) -> None:
+def render_results_canvas(results_markdown: str, canvas_id: str, canvas_builder: CanvasBuilder, session) -> None:
     """
     Render the results canvas with the processed text information.
     """
-    # Create markdown for results
-   
-    
-    # Create blocks for the results canvas
     results_blocks = [
         MarkdownUiBlock(
             id="results_display",
@@ -124,14 +121,14 @@ def render_results_canvas(results: dict, canvas_id: str, canvas_builder: CanvasB
         ),
         ButtonUiBlock(
             id="back_button",
-            text="Process Another Text",
+            text="Process Another CSV",
             type=ButtonUiBlockType.BUTTON,
         ),
     ]
-    
-    # Update the canvas with the new blocks
+
     canvas_update = canvas_builder.with_blocks(results_blocks).to_update()
     session.app.benchling.apps.update_canvas(canvas_id, canvas_update)
+
 
 def _canvas_builder_from_canvas_id(app: App, canvas_id: str) -> CanvasBuilder:
     current_canvas = app.benchling.apps.get_canvas_by_id(canvas_id)

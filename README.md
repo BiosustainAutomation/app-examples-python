@@ -1,22 +1,37 @@
-# Benchling App Python Examples
+# Benchling Canvas Demo for Biosustain
 
-The `examples/` directory contains Benchling App samples written by Benchling.
+Welcome to the exciting world of Benchling Canvas. There is some tricks to getting setup but once you are able to connect and pull information you can execute arbitrary code on entities (including custom entities that contain files).
 
-## chem-sync-local-flask
+Step 
 
-Demonstrates creating a custom UI in Benchling allowing users to search for 
-molecules from [PubChem](https://pubchem.ncbi.nlm.nih.gov/) and sync them into Benchling.
+## Step 1:🔌 Installing ngrok
 
-Uses [localtunnel](https://localtunnel.me/) and [Docker](https://www.docker.com/) to receive webhooks 
-in a local development environment running [Flask](https://flask.palletsprojects.com/) with the 
-[Benchling SDK](https://docs.benchling.com/docs/getting-started-with-the-sdk).
+To install [ngrok](https://ngrok.com/) for local tunneling:
 
-![image info](./examples/chem-sync-local-flask/docs/demo-short.gif)
+### Make a free ngrok account
 
-**Code Includes:**
-* Benchling App Authentication via [Client Credentials](https://docs.benchling.com/docs/getting-started-benchling-apps#getting-credentials)
-* Custom UI via [App Canvas](https://docs.benchling.com/docs/introduction-to-app-canvas)
-* User Feedback via [App Status](https://docs.benchling.com/docs/introduction-to-app-status)
-* Data Mapping via [App Config](https://docs.benchling.com/docs/app-configuration)
-* Receiving and verifying [Webhooks](https://docs.benchling.com/docs/getting-started-with-webhooks)
-* Creating [molecule custom entities](https://benchling.com/api/reference#/Molecules/createMolecule)
+Go to https://ngrok.com/ and setup a free account.
+
+### Install ngrok (macOS / Linux)
+```bash
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
+  sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
+  echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
+  sudo tee /etc/apt/sources.list.d/ngrok.list && \
+  sudo apt update && sudo apt install ngrok
+```
+
+You will need your account password you got when setting up on the virtual machine.
+
+### 🔐 Connect Your Account
+After installing, run the following command with your auth token (found in your ngrok dashboard):
+
+```bash
+ngrok config add-authtoken YOUR_AUTHTOKEN
+```
+
+Launch ngrok with:
+
+```bash
+ngrok https PORT_NUMBER
+```

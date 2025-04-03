@@ -10,6 +10,10 @@ from benchling_sdk.helpers.serialization_helpers import fields
 import csv
 
 def download_csv(app: App, entit_id: str, destination_path: Path) -> None:
+    """
+    Generates a client from an existing App object, and uses this to connect to benchling.
+    Finds the ID for the entity, then uses that to get the blob id of the csv, and downloads the CSV.
+    """
     #Create a new custom entity service
     cust_serv = CustomEntityService(client=app.benchling._client)
     #Get the entity proper through the custom entity service
@@ -33,8 +37,6 @@ def upload_csv(app: App, path:Path, new_filename: str, new_entity_name:str, fold
     custom_entity_service = CustomEntityService(client=app.benchling._client)
     uploaded_blob = new_blob_service.create_from_file(path, name=new_filename, mime_type="text/csv")
 
-        # Replace with your folder ID
-    schema_id = "ts_WDtkRWgc" 
     entity_fields = fields({
         "CSV": {"value": uploaded_blob.id}  # Assuming 'CSV' is the schema field for the blob link
     })
@@ -49,6 +51,7 @@ def upload_csv(app: App, path:Path, new_filename: str, new_entity_name:str, fold
     created_entity = custom_entity_service.create(new_entity)
     print(f"Created entity: {created_entity.name} with ID: {created_entity.id}")
     return(created_entity)
+
 def process_csv(file_path):
     new_row = ["Row3", "Hello again"]
     with open(file_path, 'a', newline='') as file:
